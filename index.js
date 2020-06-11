@@ -42,13 +42,16 @@ function _registerListener(win, opts = {}) {
 
     const listener = (e, item) => {
 
-        const itemUrl = decodeURIComponent(item.getURLChain()[0] || item.getURL())
+        // const itemUrl = decodeURIComponent(item.getURLChain()[0] || item.getURL())
         // const itemFilename = decodeURIComponent(item.getFilename());
         let itemFilename
+        let itemUrl
         try {
-            itemFilename = decodeURIComponent(item.getFilename())
+          itemUrl = decodeURIComponent(item.getURLChain()[0] || item.getURL())
+          itemFilename = decodeURIComponent(item.getFilename())
         } catch (err) {
-            itemFilename = item.getFilename()
+          itemUrl = item.getURLChain()[0] || item.getURL()
+          itemFilename = item.getFilename()
         }
 
         let queueItem = _popQueueItem(itemUrl);
