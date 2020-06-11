@@ -44,12 +44,7 @@ function _registerListener(win, opts = {}) {
 
         const itemUrl = decodeURIComponent(item.getURLChain()[0] || item.getURL())
         // const itemFilename = decodeURIComponent(item.getFilename());
-        let itemFilename
-        try {
-            itemFilename = decodeURIComponent(item.getFilename())
-        } catch (err) {
-            itemFilename = item.getFilename()
-        }
+        const itemFilename = item.getFilename()
 
         let queueItem = _popQueueItem(itemUrl);
         let ReceivedBytesArr = [];
@@ -143,17 +138,8 @@ const download = (options, callback) => {
 
     const request = net.request(options.url);
     
-//     const filename = decodeURIComponent(path.basename(options.url));
-//     const url = decodeURIComponent(options.url);
-    let filename
-    let url
-    try {
-      filename = decodeURIComponent(path.basename(options.url))
-      url = decodeURIComponent(options.url)
-    } catch (err) {
-      filename = path.basename(options.url)
-      url = options.url
-    }
+    const filename = decodeURIComponent(path.basename(options.url));
+    const url = decodeURIComponent(options.url);
 
     const folder = options.downloadFolder || downloadFolder
     const filePath = path.join(folder, options.path.toString(), filename.split(/[?#]/)[0])
